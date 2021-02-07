@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Meema specific stuff
+*.zip
+*.exe
+auth.py
+music.py
