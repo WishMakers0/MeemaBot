@@ -6,6 +6,8 @@ Trello to track progress: https://trello.com/b/y1TgGcpQ/meema-bot
 This bot was originally created for the Touhou ~ Fanworks 'n Chill Discord server, and has been used across a couple small-medium scale Discord servers.
 As of late, the original discord.js source code has been lost, so this repo acts to make sure the source code isn't lost again, and others are free to use and repurpose it as they see fit.  (And to potentially keep better track of things like feature requests.)
 
+Important history: https://www.youtube.com/watch?v=qTKx9C01Peo
+
 If you would like to use this for yourself, here's the instructions for installation.
 
 ## Prep
