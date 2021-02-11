@@ -9,6 +9,9 @@ auth = setAuth()
 token = auth[0]
 prefix = auth[1]
 
+banned_users = (0, 467518086262816769, 464930509101858826, 220250919093272576, 205557510256590848) #Trung has been banned.
+debug = False
+
 bot = commands.Bot(prefix, description='RoEW')
 bot.add_cog(Music(bot))
 
@@ -26,13 +29,19 @@ async def on_message(message):
     if message.author == bot.user:
         return
     
-    if message.content.startswith(prefix):
-        pieces = message.content.split()
-        cmd = pieces[0]
+    pieces = message.content.split()
+    cmd = pieces[0]
+
+    if message.content.startswith(prefix) and debug:
         log_channel = bot.get_channel(541002881688666133)
         await log_channel.send(message.author.name + "#" + message.author.discriminator + ' used the ' + cmd + ' command in ' + message.guild.name + '.')
     
-    await bot.process_commands(message)
+    if banned_users.count(message.author.id) == 0:
+        await bot.process_commands(message)
+    else:
+        if message.content.startswith(prefix):
+            print('Banned user ' + message.author.name + "#" + message.author.discriminator + ' tried to use the ' + cmd + ' command in ' + message.guild.name + '.')
+        
 
 class Mima(commands.Cog):
 
@@ -54,6 +63,17 @@ class Mima(commands.Cog):
         """
         await ctx.send('under construction')
     
-
+    @bot.command(name='update')
+    async def _update(ctx, *, arg: str):
+        """
+        Updates/refreshes the bot.  Only usable by Wish.
+        """
+        if ctx.author.id == 123211683052257280:
+            await ctx.send('Rebooting...')
+            bot.close()
+        else:
+            await ctx.send('denied')
+    
+#bot.add_cog(Mima(bot))
 
 bot.run(token)
